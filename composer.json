@@ -1,0 +1,12 @@
+{
+  "name": "vendor_name/package_name",
+  "description": "Simple support ticket system",
+  "minimum-stability": "stable",
+  "license": "proprietary",
+  "authors": [
+    {
+      "name": "Shane Cunningham",
+      "email": "shanecunningham@live.ie"
+    }
+  ]
+}
