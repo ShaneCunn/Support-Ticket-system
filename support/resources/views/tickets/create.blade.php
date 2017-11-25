@@ -1,11 +1,3 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: shane
- * Date: 25/11/2017
- * Time: 14:31
- */
-
 // create.blade.php file
 
 @extends('layouts.app')
