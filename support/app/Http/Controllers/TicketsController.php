@@ -39,6 +39,7 @@ class TicketsController extends Controller
             'ticket_id' => strtoupper(str_random(10)),
             'category_id' => $request->input('category'),
             'priority' => $request->input('priority'),
+            'tag' => $request->input('tag'),
             'message' => $request->input('message'),
             'status' => "Open",
         ]);

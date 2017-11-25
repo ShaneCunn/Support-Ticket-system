@@ -19,3 +19,7 @@ Route::get('/', function () {
 
 Route::get('new_ticket', 'TicketsController@create');
 Route::post('new_ticket', 'TicketsController@store');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
