@@ -12,4 +12,12 @@ class Ticket extends Model
         'user_id', 'category_id', 'ticket_id', 'title', 'priority', 'message','tag', 'status'
     ];
 
+
+    // Ticket.php file
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
 }
