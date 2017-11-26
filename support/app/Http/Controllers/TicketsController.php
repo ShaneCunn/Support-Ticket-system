@@ -2,15 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use App\Ticket;
- use App\Mailers\AppMailer;
- use Illuminate\Support\Facades\Auth;
-use Illuminate\Http\Request;
 use App\Category;
+use App\Http\Requests;
+use App\Mailers\AppMailer;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TicketsController extends Controller
 {
 
+    public function userTickets()
+    {
+        $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
+        $categories = Category::all();
+
+        return view('tickets.user_tickets', compact('tickets', 'categories'));
+    }
+
+    public function show($ticket_id)
+    {
+        $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+
+        $category = $ticket->category;
+
+        return view('tickets.show', compact('ticket', 'category'));
+    }
 
     /**
      * Show the form for opening a new ticket.
