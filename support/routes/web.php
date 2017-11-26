@@ -23,6 +23,8 @@ Route::post('new_ticket', 'TicketsController@store');
 Route::get('my_tickets', 'TicketsController@userTickets');
 Route::get('tickets/{ticket_id}', 'TicketsController@show');
 
+Route::post('comment', 'CommentsController@postComment');
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
