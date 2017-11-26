@@ -44,6 +44,35 @@ class TicketsController extends Controller
         return view('tickets.create', compact('categories'));
     }
 
+    public function index()
+    {
+        $tickets = Ticket::paginate(10);
+        $categories = Category::all();
+
+        return view('tickets.index', compact('tickets', 'categories'));
+    }
+
+    public function close($ticket_id, AppMailer $mailer)
+    {
+        $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+
+        $ticket->status = 'Closed';
+
+        $ticket->save();
+
+        $ticketOwner = $ticket->user;
+
+        $mailer->sendTicketStatusNotification($ticketOwner, $ticket);
+
+        return redirect()->back()->with("status", "The ticket has been closed.");
+    }
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function store(Request $request, AppMailer $mailer)
     {
         $this->validate($request, [
