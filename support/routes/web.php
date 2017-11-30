@@ -33,3 +33,20 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+// file route
+Route::get('/file', function () {
+
+    return view('file');
+});
+
+Route::post('avatars', function () {
+
+    request()->file('avatar')->store('avatars');
+    return back();
+
+});
+// image upload
+Route::get('image-upload',['as'=>'image.upload','uses'=>'ImageUploadController@imageUpload']);
+
+Route::post('image-upload',['as'=>'image.upload.post','uses'=>'ImageUploadController@imageUploadPost']);
+
