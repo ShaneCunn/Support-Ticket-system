@@ -32,6 +32,7 @@
                                                 {{ $category->name }}
                                             @endif
                                         @endforeach
+                                        
                                     </td>
                                     <td>
                                         <a href="{{ url('tickets/'. $ticket->ticket_id) }}">
