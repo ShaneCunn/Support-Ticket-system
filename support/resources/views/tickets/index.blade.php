@@ -25,7 +25,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach ($tickets as $ticket)
+                            @foreach ($tickets->reverse() as $ticket)
                                 <tr>
                                     <td>
                                         @foreach ($categories as $category)
