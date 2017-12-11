@@ -50,3 +50,10 @@ Route::get('image-upload',['as'=>'image.upload','uses'=>'ImageUploadController@i
 
 Route::post('image-upload',['as'=>'image.upload.post','uses'=>'ImageUploadController@imageUploadPost']);
 
+
+// multiple file uploads using DropZone js
+
+Route::get('dropzoneFileUpload','DropzoneController@dropzoneFileUpload') ;
+
+Route::post('dropzoneFileUpload',array('as'=>'dropzone.fileupload','uses'=>'DropzoneController@dropzoneFileUploadPost')) ;
+
