@@ -40,8 +40,8 @@
                                 {{csrf_field()}}
                                 <div class="form-group">
 
-                                    <label for="email">File upload:</label>
-                                    <input type="file" class="form-control" name="avatar" id="email">
+                                    <label for="file">File upload:</label>
+                                    <input type="file" class="form-control" name="avatar" id="file">
                                 </div>
 
 
