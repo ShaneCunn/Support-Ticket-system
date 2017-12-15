@@ -4,7 +4,6 @@
 
 @section('content')
 
-    <img src="{{ asset('images/tickets/'. $ticket->image) }}"/>
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
@@ -26,6 +25,9 @@
                             @endif
                         </p>
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
+
+                        <img src="{{ asset('images/tickets/'. $ticket->image) }}" class="img-fluid img-thumbnail"
+                             style="width:10%"/>
                     </div>
 
                     <hr>
@@ -45,7 +47,7 @@
                     </div>
 
                     <div class="comment-form">
-                        <form action="{{ url('comment') }}" method="POST" class="form">
+                        <form action="{{ url('comment') }}" method="POST" class="form"  enctype="multipart/form-data">
                             {!! csrf_field() !!}
 
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
@@ -59,7 +61,8 @@
                                     </span>
                                 @endif
                             </div>
-
+                            <div class="form-group">{{Form::label('support_image', 'Upload support image:')}}
+                                {{Form::file('support_image')}}</div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>
