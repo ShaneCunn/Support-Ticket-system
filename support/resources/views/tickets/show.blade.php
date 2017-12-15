@@ -41,13 +41,23 @@
 
                                 <div class="panel panel-body">
                                     {{ $comment->comment }}
+                                    @if ($errors->has('comment'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('comment') }}</strong>
+                                    </span>
+                                    @endif
+                                {{--@if($comment->has('image'))--}}
+                                        <img src="{{ asset('images/comments/'. $comment->image) }}"
+                                             class="img-fluid img-thumbnail"
+                                             style="height:20%"/>
+                                    {{--@endif--}}
                                 </div>
                             </div>
                         @endforeach
                     </div>
 
                     <div class="comment-form">
-                        <form action="{{ url('comment') }}" method="POST" class="form"  enctype="multipart/form-data">
+                        <form action="{{ url('comment') }}" method="POST" class="form" enctype="multipart/form-data">
                             {!! csrf_field() !!}
 
                             <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
@@ -61,8 +71,8 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group">{{Form::label('support_image', 'Upload support image:')}}
-                                {{Form::file('support_image')}}</div>
+                            <div class="form-group">{{Form::label('support_image', 'Upload comment image:')}}
+                                {{Form::file('comment_image')}}</div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Submit</button>
                             </div>

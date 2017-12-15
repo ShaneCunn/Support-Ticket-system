@@ -83,7 +83,7 @@
                         </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
-                            {{Form::label('support_image', 'Upload support image:')}}
+                            {{Form::label('comment_image', 'Upload support image:')}}
                             {{Form::file('support_image')}}
                             </div>
                         </div>
