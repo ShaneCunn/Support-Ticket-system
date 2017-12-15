@@ -90,6 +90,9 @@ class TicketsController extends Controller
             'priority' => $request->input('priority'),
             'tag' => $request->input('tag'),
             'message' => $request->input('message'),
+            // saves our image to database
+
+
             'status' => "Open",
         ]);
 
