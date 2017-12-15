@@ -11,7 +11,8 @@
                 <div class="panel-body">
                     @include('includes.flash')
 
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/new_ticket') }}">
+                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/new_ticket') }}" enctype="multipart/form-data">
+                      {{--  {!! Form::open(array('route' => 'create','files'=>true)) !!}--}}
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -80,7 +81,12 @@
                                 @endif
                             </div>
                         </div>
-
+                        <div class="form-group">
+                            <div class="col-md-6 col-md-offset-4">
+                            {{Form::label('support_image', 'Upload support image:')}}
+                            {{Form::file('support_image')}}
+                            </div>
+                        </div>
                         <div class="form-group">
                             <div class="col-md-6 col-md-offset-4">
                               <button type="submit" class="btn btn-primary">
