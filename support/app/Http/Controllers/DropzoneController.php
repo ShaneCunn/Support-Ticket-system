@@ -27,8 +27,8 @@ class DropzoneController extends Controller
 
         $imageName = time() . '.' . $request->file->getClientOriginalExtension();
 
-        //  $request->file->move(public_path('images'), $imageName);
-        request()->file('dropzone')->store('dropzone', $imageName);
+        $request->file->move(public_path('images/dropzones'), $imageName);
+       // $request->file('dropzone')->store('dropzones');
         return response()->json(['success' => $imageName]);
 
     }
