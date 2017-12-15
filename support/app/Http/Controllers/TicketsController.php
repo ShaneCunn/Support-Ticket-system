@@ -9,6 +9,7 @@ use App\Http\Requests;
 use App\Mailers\AppMailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class TicketsController extends Controller
 {
@@ -90,12 +91,19 @@ class TicketsController extends Controller
             'priority' => $request->input('priority'),
             'tag' => $request->input('tag'),
             'message' => $request->input('message'),
-            // saves our image to database
 
 
             'status' => "Open",
         ]);
+        // saves our image to database
+        if ($request->hasFile('support_image')) {
+            $image = $request->file('support_image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('images/tickets/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
+            $ticket->image = $filename;
 
+        }
         $ticket->save();
 
         $mailer->sendTicketInformation(Auth::user(), $ticket);

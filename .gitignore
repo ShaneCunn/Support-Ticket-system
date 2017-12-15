@@ -118,3 +118,4 @@ fabric.properties
 .idea/vcs.xml
 *.png
 *.JPG
+support/composer.lock
