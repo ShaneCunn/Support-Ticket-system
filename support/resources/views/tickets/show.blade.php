@@ -27,7 +27,7 @@
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
 
                         <img src="{{ asset('images/tickets/'. $ticket->image) }}" class="img-fluid img-thumbnail"
-                             style="width:10%"/>
+                             style="height:20%"/>
                     </div>
 
                     <hr>

@@ -100,7 +100,7 @@ class TicketsController extends Controller
             $image = $request->file('support_image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
             $location = public_path('images/tickets/' . $filename);
-            Image::make($image)->resize(800, 400)->save($location);
+            Image::make($image)->fit(800)->save($location);
             $ticket->image = $filename;
 
         }
@@ -108,6 +108,6 @@ class TicketsController extends Controller
 
         $mailer->sendTicketInformation(Auth::user(), $ticket);
 
-        return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened.");
+        return redirect()->back()->with("status", "<a href=\"tickets\\$ticket->ticket_id\" class=\"alert-link\"> A ticket with ID: # $ticket->ticket_id has been opened.</a>");
     }
 }
