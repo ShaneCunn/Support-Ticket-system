@@ -17,8 +17,11 @@ class CommentsController extends Controller
     public function postComment(Request $request, AppMailer $mailer)
     {
         $this->validate($request, [
-            'comment' => 'required'
+            'comment' => 'required',
+
+
         ]);
+
 
 
         $commentimage = new Comment();

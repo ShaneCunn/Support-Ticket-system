@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Comment extends Model
 {
     //
+    //public $table = 'name_exact_of_the_table';
+
 
     protected $fillable = [
         'ticket_id', 'user_id', 'comment', 'image'

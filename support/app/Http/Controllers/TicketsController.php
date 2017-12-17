@@ -98,7 +98,10 @@ class TicketsController extends Controller
         // saves our image to database
         if ($request->hasFile('support_image')) {
             $image = $request->file('support_image');
+            $imagename = $image->hashName('support_image');
             $filename = time() . '.' . $image->getClientOriginalExtension();
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+
             $location = public_path('images/tickets/' . $filename);
             Image::make($image)->fit(800)->save($location);
             $ticket->image = $filename;
