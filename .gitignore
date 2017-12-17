@@ -116,7 +116,10 @@ crashlytics-build.properties
 fabric.properties
 .idea/
 .idea/vcs.xml
+<<<<<<< HEAD
 *.png
 *.JPG
 support/composer.lock
+=======
+
 support/public/images/*
