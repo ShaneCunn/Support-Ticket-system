@@ -25,10 +25,20 @@
                             @endif
                         </p>
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
-                        {{ $imageticket = $ticket->image }}
+                        <?php  $imageticket = $ticket->image ?>
                         @if(!is_null($imageticket))
-                            <img src="{{ asset('images/tickets/'. $ticket->image) }}" class="img-fluid img-thumbnail"
-                                 style="height:20%"/>
+
+
+                            <ul class="thumbnails">
+                                <li class="img-responsive img-thumbnail"><a
+                                            href="{{ asset('images/tickets/'. $ticket->image) }}"><img
+                                                src="{{ asset('images/tickets/'. $ticket->image) }}"
+                                                height="71"/></a>
+
+
+                                </li>
+
+                            </ul>
                         @endif
                     </div>
 
@@ -54,47 +64,53 @@
 
                                     @if(!is_null($imageload))
                                         <ul class="thumbnails">
-                                            <li class="img-responsive"><a
+                                            <li class="img-responsive img-thumbnail"><a
                                                         href="{{ asset('images/comments/'. $comment->image) }}"><img
                                                             src="{{ asset('images/comments/'. $comment->image) }}"
                                                             height="71"/></a>
 
+
+                                            </li>
+
+                                        </ul>
+                                    @endif
+
+
                                 </div>
-                                </li>
-
-                                </ul>
-                                @endif
-
-
                             </div>
+                        @endforeach
                     </div>
-                    @endforeach
-                </div>
 
-                <div class="comment-form">
-                    <form action="{{ url('comment') }}" method="POST" class="form" enctype="multipart/form-data">
-                        {!! csrf_field() !!}
+                    <div class="comment-form">
+                        <form action="{{ url('comment') }}" method="POST" class="form" enctype="multipart/form-data">
+                            {!! csrf_field() !!}
 
-                        <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                            <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
 
-                        <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                            <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
+                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                                <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
+
+                                @if ($errors->has('comment'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('comment') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="form-group">{{Form::label('support_image', 'Upload comment image:')}}
+                                {{Form::file('comment_image')}}</div>
 
                             @if ($errors->has('comment'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
                             @endif
-                        </div>
-                        <div class="form-group">{{Form::label('support_image', 'Upload comment image:')}}
-                            {{Form::file('comment_image')}}</div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </div>
-                    </form>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
