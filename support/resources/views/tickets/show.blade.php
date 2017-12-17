@@ -25,9 +25,11 @@
                             @endif
                         </p>
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
-
+                        {{ $imageticket = $ticket->image }}
+                        @if(!is_null($imageticket))
                         <img src="{{ asset('images/tickets/'. $ticket->image) }}" class="img-fluid img-thumbnail"
                              style="height:20%"/>
+                            @endif
                     </div>
 
                     <hr>
@@ -46,11 +48,13 @@
                                         <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
                                     @endif
-                                {{--@if($comment->has('image'))--}}
+
+                                    {{ $imageload = $comment->image }}
+                                    @if(!is_null($imageload))
                                         <img src="{{ asset('images/comments/'. $comment->image) }}"
                                              class="img-fluid img-thumbnail"
                                              style="height:20%"/>
-                                    {{--@endif--}}
+                                    @endif
                                 </div>
                             </div>
                         @endforeach
