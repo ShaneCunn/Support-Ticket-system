@@ -116,3 +116,4 @@ crashlytics-build.properties
 fabric.properties
 .idea/
 .idea/vcs.xml
+support/public/images/*
