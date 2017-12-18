@@ -80,7 +80,8 @@ class TicketsController extends Controller
             'title' => 'required',
             'category' => 'required',
             'priority' => 'required',
-            'message' => 'required'
+            'message' => 'required',
+            'support_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
         $ticket = new Ticket([
@@ -99,7 +100,7 @@ class TicketsController extends Controller
         if ($request->hasFile('support_image')) {
             $image = $request->file('support_image');
             $imagename = $image->hashName('support_image');
-            $filename = time() . '.' . $image->getClientOriginalExtension();
+            //  $filename = time() . '.' . $image->getClientOriginalExtension();
             $filename = time() . '.' . $image->getClientOriginalExtension();
 
             $location = public_path('images/tickets/' . $filename);

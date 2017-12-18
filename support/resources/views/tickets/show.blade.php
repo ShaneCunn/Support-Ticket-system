@@ -96,12 +96,12 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group">{{Form::label('support_image', 'Upload comment image:')}}
+                            <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Upload comment image:')}}
                                 {{Form::file('comment_image')}}</div>
 
-                            @if ($errors->has('comment'))
+                            @if ($errors->has('comment_image'))
                                 <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
+                                        <strong>{{ $errors->first('comment_image') }}</strong>
                                     </span>
                             @endif
                             <div class="form-group">

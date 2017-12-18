@@ -18,10 +18,9 @@ class CommentsController extends Controller
     {
         $this->validate($request, [
             'comment' => 'required',
-
+            'comment_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
 
         ]);
-
 
 
         $commentimage = new Comment();
