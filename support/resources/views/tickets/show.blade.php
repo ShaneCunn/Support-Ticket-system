@@ -2,6 +2,7 @@
 
 @section('title', $ticket->title)
 
+
 @section('content')
 
     <div class="row">
@@ -52,7 +53,7 @@
                                 </div>
 
                                 <div class="panel panel-body">
-                                    {{ $comment->comment }}
+                                    {!!  $comment->comment !!}
                                     @if ($errors->has('comment'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('comment') }}</strong>
