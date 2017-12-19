@@ -20,12 +20,13 @@
     <script>
 
         tinymce.init({
+            branding: false ,// To disable "Powered by TinyMCE"
             selector: 'textarea',
-            plugins: 'link code',
-            menubar:false
+            plugins: 'link code advlist lists',
+            menubar:false,
+            toolbar: ' bold italic | numlist bullist  outdent indent | link | undo redo',
+           });
 
-
-        });
 
     </script>
 </head>
