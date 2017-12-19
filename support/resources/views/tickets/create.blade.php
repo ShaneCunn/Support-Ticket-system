@@ -80,6 +80,7 @@
                                         <strong>{{ $errors->first('message') }}</strong>
                                     </span>
                                 @endif
+                                test  hello
                             </div>
                         </div>
 
