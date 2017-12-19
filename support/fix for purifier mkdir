@@ -1,0 +1,9 @@
+go to C:\Users\client01\Documents\github\Support-Ticket-system\support\vendor\mews\purifier\src
+
+and then edit  line 199
+
+    if ($cachePath) {
+            if (!$this->files->isDirectory($cachePath)) {
+                $this->files->makeDirectory($cachePath, $this->config->get('purifier.cacheFileMode', 0755),true);
+            }
+        }
