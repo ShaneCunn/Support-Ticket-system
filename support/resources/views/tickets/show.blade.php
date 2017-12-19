@@ -16,7 +16,7 @@
                     @include('includes.flash')
 
                     <div class="ticket-info">
-                        <p>{{ $ticket->message }}</p>
+                        <p>{!!  $ticket->message !!}</p>
                         <p>Categry: {{ $category->name }}</p>
                         <p>
                             @if ($ticket->status === 'Open')
