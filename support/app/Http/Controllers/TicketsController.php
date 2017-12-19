@@ -10,6 +10,8 @@ use App\Mailers\AppMailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Purifier;
+
 
 class TicketsController extends Controller
 {
@@ -91,7 +93,7 @@ class TicketsController extends Controller
             'category_id' => $request->input('category'),
             'priority' => $request->input('priority'),
             'tag' => $request->input('tag'),
-            'message' => $request->input('message'),
+            'message' => Purifier::clean($request->input('message')),
 
 
             'status' => "Open",

@@ -9,6 +9,7 @@ use App\Comment;
 use App\Mailers\AppMailer;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use Purifier;
 
 class CommentsController extends Controller
 {
@@ -36,7 +37,7 @@ class CommentsController extends Controller
             $comment = Comment::create([
                 'ticket_id' => $request->input('ticket_id'),
                 'user_id' => Auth::user()->id,
-                'comment' => $request->input('comment'),
+                'comment' => Purifier::clean ($request->input('comment')),
                 'image' => $filename
 
             ]);
@@ -47,7 +48,7 @@ class CommentsController extends Controller
             $comment = Comment::create([
                 'ticket_id' => $request->input('ticket_id'),
                 'user_id' => Auth::user()->id,
-                'comment' => $request->input('comment'),
+                'comment' => Purifier::clean ($request->input('comment')),
 
             ]);
         }
