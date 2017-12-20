@@ -25,7 +25,9 @@
                             @endif
                         </p>
                         <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
-                        <?php  $imageTicket = $ticket->image ?>
+
+                        <?php  $imageTicket = $ticket->image  ?>
+                        {{--   assign image field to variable so it can be check to see if it is empty --}}
                         @if(!is_null($imageTicket))
 
 
@@ -38,7 +40,7 @@
                             </ul>
                         @endif
                     </div>
-
+                    @endif
                     <hr>
                     <div class="comments">
                         @foreach ($comments as $comment)
@@ -51,18 +53,18 @@
                                 <div class="panel-body">
                                     <div class="content">
                                         <p>
-                                            {!!  $comment->comment !!}
+                                            {!! $comment->comment !!}
                                         </p>
                                     </div>
                                     @if ($errors->has('comment'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
-                                    @endif
-                                    <?php $imageLoad = $comment->image ?>
-
-                                    @if(!is_null($imageLoad))
-                                </br>
+                                        @endif
+                                        <?php $imageLoad = $comment->image ?>
+                                        {{--   assign image field to variable so it can be check to see if it is empty --}}
+                                        @if(!is_null($imageLoad))
+                                        </br>
                                         <p>
                                         <ul class="thumbnails">
                                             <li class="img-responsive img-thumbnail"><a
@@ -72,6 +74,8 @@
                                             </li>
                                         </ul>
                                         </p>
+
+
                                     @endif
                                 </div>
                             </div>
