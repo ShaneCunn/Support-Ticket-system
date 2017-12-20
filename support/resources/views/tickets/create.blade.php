@@ -35,7 +35,7 @@
                             <label for="category" class="col-md-2 control-label">Category</label>
 
                             <div class="col-md-9">
-                                <select id="category" type="category" class="form-control" name="category">
+                                <select id="category" class="form-control" name="category">
                                     <option value="">Select Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -54,7 +54,7 @@
                             <label for="priority" class="col-md-2 control-label">Priority</label>
 
                             <div class="col-md-9">
-                                <select id="priority" type="" class="form-control" name="priority">
+                                <select id="priority"  class="form-control" name="priority">
                                     <option value="">Select Priority</option>
                                     <option value="low">Low</option>
                                     <option value="medium">Medium</option>
