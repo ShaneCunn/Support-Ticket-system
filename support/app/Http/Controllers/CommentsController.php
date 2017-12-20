@@ -9,7 +9,7 @@ use App\Comment;
 use App\Mailers\AppMailer;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
-use Purifier;
+use  Purifier;
 
 class CommentsController extends Controller
 {
