@@ -94,7 +94,7 @@
                                     </span>
                                 @endif
                             </div>
-                            <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Upload comment image:')}}
+                            <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Attach image:')}}
                                 {{Form::file('comment_image')}}</div>
 
                             @if ($errors->has('comment_image'))

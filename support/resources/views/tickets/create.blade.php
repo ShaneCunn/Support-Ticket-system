@@ -13,20 +13,23 @@
 
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/new_ticket') }}"
                           enctype="multipart/form-data">
-                        {{--  {!! Form::open(array('route' => 'create','files'=>true)) !!}--}}
+
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
-                            <label for="title" class="col-md-2 control-label">Title</label>
+                            <label for="title" class="col-md-2 control-label">Subject</label>
 
                             <div class="col-md-9">
                                 <input id="title" type="text" class="form-control" name="title"
                                        value="{{ old('title') }}">
 
+
                                 @if ($errors->has('title'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('title') }}</strong>
                                     </span>
+
+
                                 @endif
                             </div>
                         </div>
@@ -36,7 +39,7 @@
 
                             <div class="col-md-9">
                                 <select id="category" class="form-control" name="category">
-                                    <option value="">Select Category</option>
+                                    <option value="">Select a Category</option>
                                     @foreach ($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
@@ -54,8 +57,8 @@
                             <label for="priority" class="col-md-2 control-label">Priority</label>
 
                             <div class="col-md-9">
-                                <select id="priority"  class="form-control" name="priority">
-                                    <option value="">Select Priority</option>
+                                <select id="priority" class="form-control" name="priority">
+                                    <option value="">Select a Priority</option>
                                     <option value="low">Low</option>
                                     <option value="medium">Medium</option>
                                     <option value="high">High</option>
@@ -80,13 +83,13 @@
                                         <strong>{{ $errors->first('message') }}</strong>
                                     </span>
                                 @endif
-
+                                <span class="help-block">Describe the problem you're having in great detail</span>
                             </div>
                         </div>
 
                         <div class="form-group {{ $errors->has('support_image') ? ' has-error' : '' }}">
                             <div class="col-md-9 col-md-offset-2">
-                                {{Form::label('support_image', 'Upload support image:')}}
+                                {{Form::label('support_image', 'Attach image:')}}
                                 {{Form::file('support_image')}}
                                 <span class="help-block">
                                         <strong>{{ $errors->first('support_image') }}</strong>
