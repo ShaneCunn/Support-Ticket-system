@@ -40,7 +40,7 @@
                             </ul>
                         @endif
                     </div>
-                    @endif
+                    
                     <hr>
                     <div class="comments">
                         @foreach ($comments as $comment)
