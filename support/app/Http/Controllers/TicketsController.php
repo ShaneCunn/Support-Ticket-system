@@ -19,14 +19,18 @@ class TicketsController extends Controller
     public function userTickets()
     {
         $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
-        $categories = Category::all();
+        // retrieve a authorised user  id and paginate results
+        $categories = Category::all(); // return all results from DB, for that field
+
 
         return view('tickets.user_tickets', compact('tickets', 'categories'));
+        // open the view user tickets and sent a an array to it
     }
 
     public function show($ticket_id)
     {
         $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+        // get ticket id and find the first id in the DB or throws a error
 
         $comments = $ticket->comments;
 
@@ -61,11 +65,11 @@ class TicketsController extends Controller
 
         $ticket->status = 'Closed';
 
-        $ticket->save();
+        $ticket->save(); // save the data to the DB
 
         $ticketOwner = $ticket->user;
 
-        $mailer->sendTicketStatusNotification($ticketOwner, $ticket);
+        $mailer->sendTicketStatusNotification($ticketOwner, $ticket); // sent email to customer about the ticket
 
         return redirect()->back()->with("status", "The ticket has been closed.");
     }
@@ -73,11 +77,13 @@ class TicketsController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth'); // check to see if your authenticated
     }
 
     public function store(Request $request, AppMailer $mailer)
     {
+
+        // rules to check weather a field is required and rules for uploads
         $this->validate($request, [
             'title' => 'required',
             'category' => 'required',
@@ -86,7 +92,9 @@ class TicketsController extends Controller
             'support_image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
 
-        $ticket = new Ticket([
+        $ticket = new Ticket([ // creates a newt ticket object
+
+            // take in data from the request variable and assign it to key pairs in the associative array
             'title' =>  Purifier::clean($request->input('title')),
             'user_id' => Auth::user()->id,
             'ticket_id' => strtoupper(str_random(10)),
@@ -95,25 +103,25 @@ class TicketsController extends Controller
             'tag' => $request->input('tag'),
             'message' => Purifier::clean($request->input('message')),
 
-
             'status' => "Open",
         ]);
-        // saves our image to database
+
+        //  if the  request has a file , it then saves  image location to database ie public/image/support
         if ($request->hasFile('support_image')) {
             $image = $request->file('support_image');
             $imagename = $image->hashName('support_image');
             //  $filename = time() . '.' . $image->getClientOriginalExtension();
             $filename = time() . '.' . $image->getClientOriginalExtension();
 
-            $location = public_path('images/tickets/' . $filename);
-            Image::make($image)->fit(800)->save($location);
-            $ticket->image = $filename;
+            $location = public_path('images/tickets/' . $filename); // set the file save location
+            Image::make($image)->fit(800)->save($location); // resize image to 800 and save file
+            $ticket->image = $filename; // pass the location to the  image field in database query
 
         }
-        $ticket->save();
+        $ticket->save(); // save the query push it to the database as a query
 
-        $mailer->sendTicketInformation(Auth::user(), $ticket);
-
+        $mailer->sendTicketInformation(Auth::user(), $ticket); // sned mail to user
+        //  redirect page with status and url link of ticket/comment
         return redirect()->back()->with("status", "<a href=\"tickets\\$ticket->ticket_id\" class=\"alert-link\"> A ticket with ID: # $ticket->ticket_id has been opened.</a>");
     }
 }
