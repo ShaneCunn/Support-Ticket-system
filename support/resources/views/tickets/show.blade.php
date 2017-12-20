@@ -65,7 +65,7 @@
                                         {{--   assign image field to variable so it can be check to see if it is empty --}}
                                         @if(!is_null($imageLoad))
                                         </br>
-                                        <p>
+
                                         <ul class="thumbnails">
                                             <li class="img-responsive img-thumbnail"><a
                                                         href="{{ asset('images/comments/'. $comment->image) }}"><img
@@ -73,7 +73,6 @@
                                                             height="71"/></a>
                                             </li>
                                         </ul>
-                                        </p>
 
 
                                     @endif
