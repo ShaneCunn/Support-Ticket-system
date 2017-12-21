@@ -1,6 +1,5 @@
 # Support-Ticket-system
 Simple IT helpdesk written in laravel and runs on PHP 7.0
-# Dillinger
 
 [![N|Solid](http://www.onetouchtelecare.com/images/logo1.png)](http://www.onetouchtelecare.com/)
 
