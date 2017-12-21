@@ -103,14 +103,14 @@ DB_PASSWORD=secret
 ```
 
 ### Todos
- - Single sign on(SSO)
- - Tags (Tagging of tickets)
- - Quick answer templates
- - ~~ Priority levels ~~
- - Public message and private message/notes
- - Customised tickets drop down menu and so on on the type of requests
- - Auto emails
- - Slack ??
- - File upload of images up to 2mb ie screenshots
- - Separate user accounts
- - Limits tickets to company and customers, manager sees all tickets for that company. But customer only see there tickets
+ - [ ] Single sign on(SSO)
+ - [ ] Tags (Tagging of tickets)
+ - [ ] Quick answer templates
+ - [x] Priority levels
+ - [x] Public message and private message/notes
+ - [ ] Customised tickets drop down menu and so on on the type of requests
+ - [x] Auto emails
+ - [ ] Slack
+ - [x] File upload of images up to 2mb ie screenshots
+ - [x] Separate user accounts
+ - [ ] Limits tickets to company and customers, manager sees all tickets for that company. But customer only see there tickets
