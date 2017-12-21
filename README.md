@@ -107,7 +107,8 @@ DB_PASSWORD=secret
  - [ ] Tags (Tagging of tickets)
  - [ ] Quick answer templates
  - [x] Priority levels
- - [x] Public message and private message/notes
+ - [x] Public messages
+ - [x] Private messages/notes
  - [ ] Customised tickets drop down menu and so on on the type of requests
  - [x] Auto emails
  - [ ] Slack
