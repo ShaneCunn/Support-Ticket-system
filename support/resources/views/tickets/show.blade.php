@@ -40,7 +40,7 @@
                             </ul>
                         @endif
                     </div>
-                    
+
                     <hr>
                     <div class="comments">
                         @foreach ($comments as $comment)
@@ -56,11 +56,12 @@
                                             {!! $comment->comment !!}
                                         </p>
                                     </div>
-                                    @if ($errors->has('comment'))
+                                    @if($errors->has('comment'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
-                                        @endif
+                                    @endif
+
                                         <?php $imageLoad = $comment->image ?>
                                         {{--   assign image field to variable so it can be check to see if it is empty --}}
                                         @if(!is_null($imageLoad))
