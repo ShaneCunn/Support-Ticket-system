@@ -65,7 +65,7 @@
                                         <?php $imageLoad = $comment->image ?>
                                         {{--   assign image field to variable so it can be check to see if it is empty --}}
                                         @if(!is_null($imageLoad))
-                                        </br>
+                                        <br />
 
                                         <ul class="thumbnails">
                                             <li class="img-responsive img-thumbnail"><a
