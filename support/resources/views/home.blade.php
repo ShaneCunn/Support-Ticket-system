@@ -46,7 +46,7 @@
                             <!-- Branding Image -->
 
                             <p>You are logged in!</p>
-                          
+
                         </div>
                         @if (Auth::user()->is_admin)
                             <div class="row">
@@ -97,6 +97,69 @@
                                 </div>
                             </div>
                         @endif
+
+                        <?php  $testval = \App\Category::all();?>
+
+
+
+                        <div id="information-panel-categories" class="list-group tab-pane fade in active">
+                            <a href="#" class="list-group-item disabled">
+                            <span>Category
+                                <span class="badge">Total</span>
+                            </span>
+                                <span class="pull-right text-muted small">
+                                <em>
+                                    Open /
+                                     Closed
+                                </em>
+                            </span>
+                            </a>
+                            <a href="#" class="list-group-item">
+                        <span style="color: #0014f4">
+                            Technical <span class="badge">{{  \App\Ticket::where('category_id','=','1')->count() }}</span>
+                        </span>
+                                <span class="pull-right text-muted small">
+                            <em>
+                              {{  \App\Ticket::where('category_id','=','1')->where('status','=','Open')->count() }} /
+                                {{  \App\Ticket::where('category_id','=','1')->where('status','=','Closed')->count() }}
+                            </em>
+                        </span>
+                            </a>
+                            <a href="#" class="list-group-item">
+                        <span style="color: #2b9900">
+                            Support <span class="badge">{{  \App\Ticket::where('category_id','=','2')->count() }}</span>
+                        </span>
+                                <span class="pull-right text-muted small">
+                            <em>
+                               {{  \App\Ticket::where('category_id','=','2')->where('status','=','Open')->count() }} /
+                                {{  \App\Ticket::where('category_id','=','2')->where('status','=','Closed')->count() }}
+                            </em>
+                        </span>
+                            </a>
+                            <a href="#" class="list-group-item">
+                        <span style="color: #7e0099">
+                           Bug <span class="badge">{{  \App\Ticket::where('category_id','=','3')->count() }}</span>
+                        </span>
+                                <span class="pull-right text-muted small">
+                            <em>
+                              {{  \App\Ticket::where('category_id','=','3')->where('status','=','Open')->count() }} /
+                                {{  \App\Ticket::where('category_id','=','3')->where('status','=','Closed')->count() }}
+                            </em>
+                        </span>
+                            </a>
+                            <a href="#" class="list-group-item">
+                        <span style="color: #FF4500">
+                          Pre-Sale <span class="badge">{{  \App\Ticket::where('category_id','=','4')->count() }}</span>
+                        </span>
+                                <span class="pull-right text-muted small">
+                            <em>
+                               {{  \App\Ticket::where('category_id','=','4')->where('status','=','Open')->count() }} /
+                                {{  \App\Ticket::where('category_id','=','4')->where('status','=','Closed')->count() }}
+                            </em>
+                        </span>
+                            </a>
+
+                        </div>
                     </div>
                 </div>
             </div>

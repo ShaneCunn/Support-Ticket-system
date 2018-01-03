@@ -28,6 +28,7 @@
                             @foreach ($tickets->reverse() as $ticket)
                                 <tr>
                                     <td>
+
                                         @foreach ($categories as $category)
                                             @if ($category->id === $ticket->category_id)
                                                 {{ $category->name }}
