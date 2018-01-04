@@ -127,7 +127,7 @@ class TicketsController extends Controller
     }
 
 
-    public function getOrderColumn(Request $request)
+ /*   public function getOrderColumn(Request $request)
     {// Category 	Title 	Status 	Last Updated updated_at
         if ($request->ajax()) {
             return Datatables::of(Ticket::query())
@@ -136,5 +136,5 @@ class TicketsController extends Controller
         }
 
         return view('datatables.eloquent.order-column', ['title' => 'Order Column API']);
-    }
+    }*/
 }
