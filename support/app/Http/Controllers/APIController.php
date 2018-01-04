@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Ticket;
+use App\Category;
 
 class APIController extends Controller
 {
@@ -25,8 +26,8 @@ class APIController extends Controller
     public function table(){
 
         $tickets = Ticket::all();
-
-        return view('datatable', compact('tickets'));
+        $categories = Category::all();
+        return view('datatable', compact('tickets', 'categories'));
     }
 
     public function getData()
