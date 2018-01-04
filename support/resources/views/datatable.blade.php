@@ -34,7 +34,11 @@
                                     <td><a href="{{ url('tickets/'. $ticket->ticket_id) }}">
                                             #{{ $ticket->ticket_id }} - {{ $ticket->title }}
                                         </a></td>
-                                    <td>{{ $ticket->status }}</td>
+                                    <td>     @if ($ticket->status === 'Open')
+                                            <span class="label label-success">{{ $ticket->status }}</span>
+                                        @else
+                                            <span class="label label-danger">{{ $ticket->status }}</span>
+                                        @endif</td>
                                     <td>{{ $ticket->updated_at }}</td>
 
                                    

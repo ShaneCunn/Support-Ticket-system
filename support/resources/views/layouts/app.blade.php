@@ -46,18 +46,7 @@
            });
 
 
-        $('#ticket-table').DataTable({
-            processing: true,
-            serverSide: true,
-            ajax: '',
-            columns: [
-                {data: 'id', name: 'id'},
-                {data: 'name', name: 'name'},
-                {data: 'email', name: 'email'},
-                {data: 'created_at', name: 'created_at'},
-                {data: 'updated_at', name: 'updated_at'}
-            ]
-        });
+
 
     </script>
 
@@ -105,7 +94,7 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
+                                       onclick="event.defaultPrevented();
                                                      document.getElementById('logout-form').submit();">
                                         Logout
                                     </a>
