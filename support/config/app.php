@@ -189,6 +189,11 @@ return [
 
         // ... html  purifer, clean html code for placement in database
          Mews\Purifier\PurifierServiceProvider::class,
+
+
+        // ...  Datatables Service Provider and Facade package
+
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
@@ -241,7 +246,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
-
+        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
     ],
 
 ];

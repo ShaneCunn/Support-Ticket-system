@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Purifier;
+use Yajra\DataTables\DataTables;
 
 
 class TicketsController extends Controller
@@ -123,5 +124,17 @@ class TicketsController extends Controller
         $mailer->sendTicketInformation(Auth::user(), $ticket); // sned mail to user
         //  redirect page with status and url link of ticket/comment
         return redirect()->back()->with("status", "<a href=\"tickets\\$ticket->ticket_id\" class=\"alert-link\"> A ticket with ID: # $ticket->ticket_id has been opened.</a>");
+    }
+
+
+    public function getOrderColumn(Request $request)
+    {// Category 	Title 	Status 	Last Updated updated_at
+        if ($request->ajax()) {
+            return Datatables::of(Ticket::query())
+                ->orderColumn('title', 'updated_at $1')
+                ->make(true);
+        }
+
+        return view('datatables.eloquent.order-column', ['title' => 'Order Column API']);
     }
 }

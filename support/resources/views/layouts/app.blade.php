@@ -11,11 +11,29 @@
     <title>{{ config('app.name', 'Support ticket app') }}</title>
 
     <!-- Styles -->
+
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="/js/tinymce/tinymce.min.js"></script>
+
+
+
+
+    <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+
+
+    <!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- DataTables -->
+    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+    <!-- Bootstrap JavaScript -->
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <!-- App scripts -->
+    @yield('styles')
+    @stack('scripts')
+
 
     <script>
 
@@ -28,7 +46,21 @@
            });
 
 
+        $('#ticket-table').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: '',
+            columns: [
+                {data: 'id', name: 'id'},
+                {data: 'name', name: 'name'},
+                {data: 'email', name: 'email'},
+                {data: 'created_at', name: 'created_at'},
+                {data: 'updated_at', name: 'updated_at'}
+            ]
+        });
+
     </script>
+
 </head>
 <body>
 <div id="app">
@@ -97,7 +129,7 @@
 <!-- Scripts -->
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="/js/dropzone.js"></script>
+@yield('javascripts')
 
-{{-- //  <script src="{{ asset('js/dropzone.js') }}"></script>--}}
 </body>
 </html>

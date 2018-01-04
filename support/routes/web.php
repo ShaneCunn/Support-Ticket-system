@@ -57,3 +57,4 @@ Route::get('dropzoneFileUpload','DropzoneController@dropzoneFileUpload') ;
 
 Route::post('dropzoneFileUpload',array('as'=>'dropzone.fileupload','uses'=>'DropzoneController@dropzoneFileUploadPost')) ;
 
+Route::get('/table', 'APIController@table')->name('table');

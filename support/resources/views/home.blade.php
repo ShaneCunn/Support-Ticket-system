@@ -96,11 +96,12 @@
                                     </div>
                                 </div>
                             </div>
-                        @endif
+
 
                         <?php  $testval = \App\Category::all();?>
-
-
+                        <!-- TODO: Change to Foreach loop -->.
+                            <!-- TODO:  ADD in charts. -->.
+                            <!-- TODO: Made sure links are working in the future -->.
 
                         <div id="information-panel-categories" class="list-group tab-pane fade in active">
                             <a href="#" class="list-group-item disabled">
@@ -109,8 +110,7 @@
                             </span>
                                 <span class="pull-right text-muted small">
                                 <em>
-                                    Open /
-                                     Closed
+                                    Open / Closed
                                 </em>
                             </span>
                             </a>
@@ -160,6 +160,7 @@
                             </a>
 
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
