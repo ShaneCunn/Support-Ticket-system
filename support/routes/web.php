@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Auth::routes();
+
+//Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout'); //Just added to fix issue
 // routes.php file
 
 Route::get('new_ticket', 'TicketsController@create');
@@ -30,7 +33,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('close_ticket/{ticket_id}', 'TicketsController@close');
 });
 
-Auth::routes();
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 // file route
@@ -58,3 +61,4 @@ Route::get('dropzoneFileUpload','DropzoneController@dropzoneFileUpload') ;
 Route::post('dropzoneFileUpload',array('as'=>'dropzone.fileupload','uses'=>'DropzoneController@dropzoneFileUploadPost')) ;
 
 Route::get('/table', 'APIController@table')->name('table');
+Route::get('/ajax', 'APIController@table')->name('ajax');

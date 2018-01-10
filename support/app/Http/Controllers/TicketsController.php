@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+
 use App\Ticket;
 use App\Category;
 use App\Http\Requests;
@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Purifier;
-use Yajra\DataTables\DataTables;
+
 
 
 class TicketsController extends Controller
@@ -127,14 +127,5 @@ class TicketsController extends Controller
     }
 
 
- /*   public function getOrderColumn(Request $request)
-    {// Category 	Title 	Status 	Last Updated updated_at
-        if ($request->ajax()) {
-            return Datatables::of(Ticket::query())
-                ->orderColumn('title', 'updated_at $1')
-                ->make(true);
-        }
 
-        return view('datatables.eloquent.order-column', ['title' => 'Order Column API']);
-    }*/
 }

@@ -246,7 +246,7 @@ return [
         'Html' => Collective\Html\HtmlFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Purifier' => Mews\Purifier\Facades\Purifier::class,
-        'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+
     ],
 
 ];
