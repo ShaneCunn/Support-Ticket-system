@@ -24,7 +24,7 @@
 
 
 
-    <!-- jQuery -->
+<!-- jQuery -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- DataTables -->
     <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
@@ -38,14 +38,12 @@
     <script>
 
         tinymce.init({
-            branding: false ,// To disable "Powered by TinyMCE"
+            branding: false,// To disable "Powered by TinyMCE"
             selector: 'textarea',
             plugins: 'link code advlist lists',
-            menubar:false,
+            menubar: false,
             toolbar: ' bold italic | numlist bullist  outdent indent | link | undo redo',
-           });
-
-
+        });
 
 
     </script>
@@ -94,15 +92,10 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{{ route('logout') }}"
-                                       onclick="event.defaultPrevented();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                                          style="display: none;">{{ csrf_field() }}</form>
                                 </li>
                             </ul>
                         </li>
