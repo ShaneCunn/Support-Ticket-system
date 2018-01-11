@@ -96,10 +96,10 @@ class TicketsController extends Controller
         $ticket = new Ticket([ // creates a newt ticket object
 
             // take in data from the request variable and assign it to key pairs in the associative array
-            'title' =>  Purifier::clean($request->input('title')),
+            'title' =>  strip_tags($request->input('title')),
             'user_id' => Auth::user()->id,
             'ticket_id' => strtoupper(str_random(10)),
-            'category_id' => Purifier::clean ($request->input('category')),
+            'category_id' => strip_tags($request->input('category')),
             'priority' => Purifier::clean ($request->input('priority')),
             'tag' => $request->input('tag'),
             'message' => Purifier::clean($request->input('message')),
