@@ -61,4 +61,14 @@ Route::get('dropzoneFileUpload','DropzoneController@dropzoneFileUpload') ;
 Route::post('dropzoneFileUpload',array('as'=>'dropzone.fileupload','uses'=>'DropzoneController@dropzoneFileUploadPost')) ;
 
 Route::get('/table', 'APIController@table')->name('table');
-Route::get('/ajax', 'APIController@table')->name('ajax');
+//Route::get('/ajax', 'APIController@ajax')->name('ajax');
+
+
+Route::get('/datatables', 'DatatablesController@getIndex')->name('datatables');
+
+Route::get('datatables.data', 'DatatablesController@anyData')->name('datatables.data');
+
+/*Route::controller('datatables', 'DatatablesController', [
+    'anyData'  => 'datatables.data',
+    'getIndex' => 'datatables',
+]);*/

@@ -23,27 +23,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                @foreach ($tickets as $ticket)
-                                    <td>
-                                        @foreach ($categories as $category)
-                                            @if ($category->id === $ticket->category_id)
-                                                {{ $category->name }}
-                                            @endif
-                                        @endforeach</td>
-                                    <td><a href="{{ url('tickets/'. $ticket->ticket_id) }}">
-                                            #{{ $ticket->ticket_id }} - {{ $ticket->title }}
-                                        </a></td>
-                                    <td>     @if ($ticket->status === 'Open')
-                                            <span class="label label-success">{{ $ticket->status }}</span>
-                                        @else
-                                            <span class="label label-danger">{{ $ticket->status }}</span>
-                                        @endif</td>
-                                    <td>{{ $ticket->updated_at }}</td>
 
-                                   
-                            </tr>
-                            @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -51,13 +31,24 @@
             </div>
         </div>
     </div>
+
 @endsection
 
 @section('javascripts')
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script>
-        $(document).ready(function () {
-            $('#datatable').DataTable();
+        $(document).ready( function () {
+            $('#datatable').DataTable({
+                "processing": true,
+                "serverSide": true,
+                "ajax": "{{ route('datatables.ajax') }}",
+                "columns": [
+                    { "data": "id" },
+                    { "data": "title" },
+                    { "data": "status" },
+                    { "data": "updated_at" }
+                ]
+            });
         });
 
     </script>

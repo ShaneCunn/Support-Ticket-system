@@ -37,11 +37,20 @@ class APIController extends Controller
         return view('datatable', compact('tickets', 'categories'));
     }
 
+
+    public function ajax(){
+
+        $tickets = Ticket::all();
+        // $tickets = Ticket::where('user_id', Auth::user()->id);
+        $categories = Category::all();
+        return view('ajax', compact('tickets', 'categories'));
+    }
     public function getData()
 
     {
 
         return Datatables::of(Ticket::query())->make(true);
+      //  return Datatables::of(Category::query())->make(true);
 
     }
 }
