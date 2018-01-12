@@ -37,22 +37,30 @@ class DatatablesController extends Controller
         { data: 'title', name: 'title' },
         { data: 'created_at', name: 'created_at' },
         { data: 'updated_at', name: 'updated_at' }*/
-     //   return Datatables::of(Ticket::query())->make(true);
+        //   return Datatables::of(Ticket::query())->make(true);
 
         $tickets = DB::table('tickets')->join('categories', 'tickets.category_id', '=', 'categories.id')
-            ->select([ 'tickets.id', 'categories.name', 'tickets.title','tickets.updated_at','tickets.status']);
- //       <a href="{{ url('tickets/' . $ticket->ticket_id) }}" class="btn btn-primary">Comment</a>  <a href="{{ url('tickets/' . $ticket->ticket_id) }}" class="btn btn-primary">Comment</a>
+            ->select(['tickets.id', 'categories.name', 'tickets.title', 'tickets.updated_at', 'tickets.status', 'tickets.ticket_id']);
         return Datatables::of($tickets)
             ->editColumn('title', '{!! str_limit($title, 60) !!}')
-            ->editColumn('name','{!! str_limit($name, 60) !!}' )
+            ->editColumn('name', '{!! str_limit($name, 60) !!}')
             ->addColumn('action', function ($tickets) {
-                return '<a href="#edit-'.$tickets->id.'" class="btn btn-xs btn-primary"><i class="glyphicon glyphicon-edit"></i> Edit</a>';
+
+                $return = '<a href="tickets/' . $tickets->ticket_id . '" class="btn btn-xs btn-primary">
+<i class="glyphicon glyphicon-edit"></i> Read </a><form  method="POST" action="/admin/close_ticket/' . $tickets->ticket_id . '">
+                ' . csrf_field() . '
+               <button type="submit" class="btn btn-danger" >Close</button ></form>';
+
+                return $return;
+
+            })
             ->make(true);
-        /*$posts = DB::table('posts')->join('users', 'posts.user_id', '=', 'users.id')
-            ->select(['posts.id', 'posts.title', 'users.name', 'users.email', 'posts.created_at', 'posts.updated_at']);
+        /*$posts = DB::table('posts')->join('users', 'posts . user_id', ' = ', 'users . id')
+            ->select(['posts . id', 'posts . title', 'users . name', 'users . email', 'posts . created_at', 'posts . updated_at']);
 
         return Datatables::of($posts)
-            ->editColumn('title', '{!! str_limit($title, 60) !!}')
+            ->editColumn('title', '{
+                    !!str_limit($title, 60) !!}')
             ->editColumn('name', function ($model) {
                 return \HTML::mailto($model->email, $model->name);
             })
