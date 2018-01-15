@@ -15,12 +15,13 @@
                         <table class="table table-bordered" id="users-table">
                             <thead>
                             <tr>
-                                <th>id</th>
+                                <th>#</th>
                                 <th>Category</th>
                                 <th>Subject</th>
                                 <th>status</th>
                                 <th>Updated at</th>
                                 <th>Action</th>
+
                             </tr>
                             </thead>
                         </table>
@@ -42,11 +43,12 @@
             ajax: '{!! route('datatables.data') !!}',
             columns: [
                 {data: 'id', name: 'id'},
-               {data: 'name', name: 'categories.name'},
+                {data: 'name', name: 'categories.name'},
                 {data: 'title', name: 'title'},
                 {data: 'status', name: 'status'},
                 {data: 'updated_at', name: 'updated_at'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+                {data: 'action', name: 'action', orderable: false, searchable: false},
+
             ],
             initComplete: function () {
                 this.api().columns().every(function () {
