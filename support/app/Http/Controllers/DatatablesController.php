@@ -33,7 +33,7 @@ class DatatablesController extends Controller
 
 
         $tickets = DB::table('tickets')->join('categories', 'tickets.category_id', '=', 'categories.id')
-            ->select(['tickets.id', 'categories.name', 'tickets.title', 'tickets.updated_at', 'tickets.status', 'tickets.ticket_id']);
+            ->select(['tickets.id', 'categories.name', 'tickets.title', 'tickets.updated_at', 'tickets.status', 'tickets.ticket_id', 'tickets.priority']);
         return Datatables::of($tickets)
             ->editColumn('title', '{!! str_limit($title, 60) !!}')
             ->editColumn('name', '{!! str_limit($name, 60) !!}')
