@@ -76,6 +76,22 @@ class TicketsController extends Controller
     }
 
 
+    public function open($ticket_id, AppMailer $mailer)
+    {
+        $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+
+        $ticket->status = 'Open';
+
+        $ticket->save(); // save the data to the DB
+
+        $ticketOwner = $ticket->user;
+
+        $mailer->sendTicketStatusNotification($ticketOwner, $ticket); // sent email to customer about the ticket
+
+        return redirect()->back()->with("status", "The ticket has been Re-opened.");
+    }
+
+
     public function __construct()
     {
         $this->middleware('auth'); // check to see if your authenticated

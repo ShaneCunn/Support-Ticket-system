@@ -17,18 +17,18 @@
                                     <button type="button" class="btn btn-info"
                                             data-toggle="modal"
                                             data-target="#ticket-edit-modal">Edit</button>
-                                   <a href="#test" class="btn btn-danger deleteit" form="delete-ticket-73">Delete</a>
+                                   <a href="#test" class="btn btn-danger deleteit" form="delete-ticket">Delete</a>
                                </form>
 
                             @else
-                                <form action="{{ url('admin/close_ticket/' . $ticket->ticket_id) }}"
+                                <form action="{{ url('admin/open_ticket/' . $ticket->ticket_id) }}"
                                       method="POST">
                                {!! csrf_field() !!}
                                     <button type="submit" class="btn btn-success">Reopen Ticket</button>
                                     <button type="button" class="btn btn-info"
                                             data-toggle="modal"
                                             data-target="#ticket-edit-modal">Edit</button>
-                                   <a href="#test" class="btn btn-danger deleteit" form="delete-ticket-73">Delete</a>
+                                   <a href="#test" class="btn btn-danger deleteit" form="delete-ticket">Delete</a>
                                </form>
 
                             @endif
@@ -120,7 +120,7 @@
                             </div>
                         @endforeach
                     </div>
-
+@if ($ticket->status === 'Open')
                     <div class="comment-form">
                         <form action="{{ url('comment') }}" method="POST" class="form" enctype="multipart/form-data">
                             {!! csrf_field() !!}
@@ -150,6 +150,7 @@
                             </div>
                         </form>
                     </div>
+   @endif
                 </div>
             </div>
         </div>
