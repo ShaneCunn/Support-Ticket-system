@@ -14,7 +14,7 @@
                     @if ($tickets->isEmpty())
                         <p>There are currently no tickets.</p>
                     @else
-
+                        @include('includes.flash')
                     <!-- TODO: Make rows sortable -->.
 
                         <table id="ticket-table" class="table table-striped table-bordered">
