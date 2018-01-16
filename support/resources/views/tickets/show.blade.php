@@ -8,34 +8,46 @@
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h2> {{ $ticket->ticket_id }} - {{ $ticket->title }}<span class="pull-right">
+                    <h2> {{ $ticket->ticket_id }} - {{ $ticket->title }}
+                        <span class="pull-right">
                                @if ($ticket->status === 'Open')
-                                <form action="{{ url('admin/close_ticket/' . $ticket->ticket_id) }}"
-                                      method="POST">
+                                <form role="form" action="{{ url('admin/close_ticket/' . $ticket->ticket_id) }}"
+                                      method="POST" class="myForm">
                                {!! csrf_field() !!}
                                     <button type="submit" class="btn btn-success">Mark Complete</button>
                                     <button type="button" class="btn btn-info"
                                             data-toggle="modal"
                                             data-target="#ticket-edit-modal">Edit</button>
-                                   <a href="#test" class="btn btn-danger deleteit" form="delete-ticket">Delete</a>
+
                                </form>
 
+
                             @else
-                                <form action="{{ url('admin/open_ticket/' . $ticket->ticket_id) }}"
-                                      method="POST">
+                                <form role="form" action="{{ url('admin/open_ticket/' . $ticket->ticket_id) }}"
+                                      method="POST" class="myForm">
                                {!! csrf_field() !!}
                                     <button type="submit" class="btn btn-success">Reopen Ticket</button>
                                     <button type="button" class="btn btn-info"
                                             data-toggle="modal"
                                             data-target="#ticket-edit-modal">Edit</button>
-                                   <a href="#test" class="btn btn-danger deleteit" form="delete-ticket">Delete</a>
+
+
                                </form>
 
+
                             @endif
+                            <form role="form" action="{{ url('admin/destroy_ticket/' . $ticket->id) }}" method="POST"
+                                  class="myForm">
+                                {!!  csrf_field() !!}
+                                {{--   {{ method_field('DESTROY') }}--}}
+                                <button data-toggle="tooltip" data-placement="top" title="Delete" type="submit"
+                                        class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this item?');"><span
+                                            class="glyphicon glyphicon-remove"></span></button>
+                                       </form>
+                                </span>
 
-
-
-                       </span></h2>
+                    </h2>
                 </div>
 
                 <div class="panel-body">
@@ -120,37 +132,38 @@
                             </div>
                         @endforeach
                     </div>
-@if ($ticket->status === 'Open')
-                    <div class="comment-form">
-                        <form action="{{ url('comment') }}" method="POST" class="form" enctype="multipart/form-data">
-                            {!! csrf_field() !!}
+                    @if ($ticket->status === 'Open')
+                        <div class="comment-form">
+                            <form action="{{ url('comment') }}" method="POST" class="form"
+                                  enctype="multipart/form-data">
+                                {!! csrf_field() !!}
 
-                            <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
 
-                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <label for="comment">Comment:</label>
-                                <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
+                                <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                                    <label for="comment">Comment:</label>
+                                    <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
 
-                                @if ($errors->has('comment'))
+                                    @if ($errors->has('comment'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('comment') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Attach image:')}}
+                                    {{Form::file('comment_image')}}</div>
+
+                                @if ($errors->has('comment_image'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
+                                                <strong>{{ $errors->first('comment_image') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                            <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Attach image:')}}
-                                {{Form::file('comment_image')}}</div>
-
-                            @if ($errors->has('comment_image'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('comment_image') }}</strong>
-                                    </span>
-                            @endif
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
-   @endif
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

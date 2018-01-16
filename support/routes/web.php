@@ -32,6 +32,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::get('tickets', 'TicketsController@index');
     Route::post('close_ticket/{ticket_id}', 'TicketsController@close');
     Route::post('open_ticket/{ticket_id}', 'TicketsController@open');
+    Route::post('destroy_ticket/{ticket_id}', 'TicketsController@destroy');
 });
 
 
