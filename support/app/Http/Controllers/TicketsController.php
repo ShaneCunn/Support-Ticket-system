@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+
 use App\Ticket;
 use App\Category;
 use App\Http\Requests;
 use App\Mailers\AppMailer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Purifier;
 
@@ -59,6 +60,22 @@ class TicketsController extends Controller
         return view('tickets.index', compact('tickets', 'categories'));
     }
 
+    public function open($ticket_id, AppMailer $mailer)
+    {
+        $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+
+        $ticket->status = 'Open';
+
+        $ticket->save(); // save the data to the DB
+
+        $ticketOwner = $ticket->user;
+
+        $mailer->sendTicketStatusNotification($ticketOwner, $ticket); // sent email to customer about the ticket
+
+        return redirect()->back()->with("status", "The ticket has been Re-opened.");
+    }
+
+
     public function close($ticket_id, AppMailer $mailer)
     {
         $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
@@ -72,6 +89,37 @@ class TicketsController extends Controller
         $mailer->sendTicketStatusNotification($ticketOwner, $ticket); // sent email to customer about the ticket
 
         return redirect()->back()->with("status", "The ticket has been closed.");
+    }
+
+    public function destroy($id)
+    {
+        //  $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
+
+        $removeID = Ticket::find($id);
+
+
+        if ($removeID != null) {
+
+           // DB::table("tickets")->delete($id);
+            $removeID->delete();
+
+            return redirect('admin/tickets')->with("status", "The ticket has been Deleted.");
+        }
+        else {
+
+            //DB::table("tickets")->delete($id);
+
+            return redirect('admin/tickets')->with("failed", "Unable to delete the Ticket.");
+        }
+
+
+        //Ticket::destroy($ticket_id);
+
+        // $ticket->status = 'Closed';
+
+        //$ticket->delete(); // delete the data from the DB
+
+
     }
 
 
@@ -95,11 +143,11 @@ class TicketsController extends Controller
         $ticket = new Ticket([ // creates a newt ticket object
 
             // take in data from the request variable and assign it to key pairs in the associative array
-            'title' =>  Purifier::clean($request->input('title')),
+            'title' => strip_tags($request->input('title')),
             'user_id' => Auth::user()->id,
             'ticket_id' => strtoupper(str_random(10)),
-            'category_id' => Purifier::clean ($request->input('category')),
-            'priority' => Purifier::clean ($request->input('priority')),
+            'category_id' => strip_tags($request->input('category')),
+            'priority' => Purifier::clean($request->input('priority')),
             'tag' => $request->input('tag'),
             'message' => Purifier::clean($request->input('message')),
 
@@ -124,4 +172,6 @@ class TicketsController extends Controller
         //  redirect page with status and url link of ticket/comment
         return redirect()->back()->with("status", "<a href=\"tickets\\$ticket->ticket_id\" class=\"alert-link\"> A ticket with ID: # $ticket->ticket_id has been opened.</a>");
     }
+
+
 }

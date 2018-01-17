@@ -11,24 +11,53 @@
     <title>{{ config('app.name', 'Support ticket app') }}</title>
 
     <!-- Styles -->
+
+
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/dropzone.css') }}" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
           integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-    <script src="/js/tinymce/tinymce.min.js"></script>
+
+    <style>
+
+        .myForm-box {
+            display: table-cell;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+
+    </style>
+@yield('styles')
+
+
+
+
+
+
+<!-- jQuery -->
+    <script src="//code.jquery.com/jquery.js"></script>
+    <!-- DataTables -->
+            <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+
+    <!-- App scripts -->
+    <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+
+    @stack('scripts')
+
 
     <script>
 
         tinymce.init({
-            branding: false ,// To disable "Powered by TinyMCE"
+            branding: false,// To disable "Powered by TinyMCE"
             selector: 'textarea',
             plugins: 'link code advlist lists',
-            menubar:false,
+            menubar: false,
             toolbar: ' bold italic | numlist bullist  outdent indent | link | undo redo',
-           });
+        });
 
 
     </script>
+
 </head>
 <body>
 <div id="app">
@@ -73,15 +102,10 @@
                             <ul class="dropdown-menu">
                                 <li>
                                     <a href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        Logout
-                                    </a>
+                                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                          style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
+                                          style="display: none;">{{ csrf_field() }}</form>
                                 </li>
                             </ul>
                         </li>
@@ -95,9 +119,11 @@
 </div>
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+{{-- // <script src="{{ asset('js/app.js') }}"></script>--}}
 <script src="/js/dropzone.js"></script>
+<!-- Bootstrap JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+@yield('javascripts')
 
-{{-- //  <script src="{{ asset('js/dropzone.js') }}"></script>--}}
 </body>
 </html>

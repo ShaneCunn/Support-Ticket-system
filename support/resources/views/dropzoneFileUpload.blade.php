@@ -35,11 +35,10 @@
 
                             <h3>Laravel 5.5 - multiple images uploading using dropzone js</h3>
 
-                    <form>
-                            {!! Form::open([ 'route' => [ 'dropzone.fileupload' ], 'files' => true, 'class' => 'dropzone','id'=>"image-upload"]) !!}
+                            <form>
+                                {!! Form::open([ 'route' => [ 'dropzone.fileupload' ], 'files' => true, 'class' => 'dropzone','id'=>"image-upload"]) !!}
 
-                            {!! Form::close() !!}
-
+                                {!! Form::close() !!}
 
 
                             </form>

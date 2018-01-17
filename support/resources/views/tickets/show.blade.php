@@ -3,29 +3,80 @@
 @section('title', $ticket->title)
 
 @section('content')
-
+    <!-- TODO: Make rows sortable -->.
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    {{ $ticket->ticket_id }} - {{ $ticket->title }}
+                    <h2> {{ $ticket->ticket_id }} - {{ $ticket->title }}
+                        <span class="pull-right">
+                               @if ($ticket->status === 'Open')
+                                <form role="form" action="{{ url('admin/close_ticket/' . $ticket->ticket_id) }}"
+                                      method="POST" class="myForm">
+                               {!! csrf_field() !!}
+                                    <button type="submit" class="btn btn-success">Mark Complete</button>
+                                    <button type="button" class="btn btn-info"
+                                            data-toggle="modal"
+                                            data-target="#ticket-edit-modal">Edit</button>
+
+                               </form>
+
+
+                            @else
+                                <form role="form" action="{{ url('admin/open_ticket/' . $ticket->ticket_id) }}"
+                                      method="POST" class="myForm">
+                               {!! csrf_field() !!}
+                                    <button type="submit" class="btn btn-success">Reopen Ticket</button>
+                                    <button type="button" class="btn btn-info"
+                                            data-toggle="modal"
+                                            data-target="#ticket-edit-modal">Edit</button>
+
+
+                               </form>
+
+
+                            @endif
+                            <form role="form" action="{{ url('admin/destroy_ticket/' . $ticket->id) }}" method="POST"
+                                  class="myForm">
+                                {!!  csrf_field() !!}
+                                {{--   {{ method_field('DESTROY') }}--}}
+                                <button data-toggle="tooltip" data-placement="top" title="Delete" type="submit"
+                                        class="btn btn-danger"
+                                        onclick="return confirm('Are you sure you want to delete this item?');"><span
+                                            class="glyphicon glyphicon-remove"></span></button>
+                                       </form>
+                                </span>
+
+                    </h2>
                 </div>
 
                 <div class="panel-body">
                     @include('includes.flash')
 
                     <div class="ticket-info">
-                        <p>{!!  $ticket->message !!}</p>
-                        <p>Category: {{ $category->name }}</p>
-                        <p>
-                            @if ($ticket->status === 'Open')
-                                Status: <span class="label label-success">{{ $ticket->status }}</span>
-                            @else
-                                Status: <span class="label label-danger">{{ $ticket->status }}</span>
-                            @endif
-                        </p>
-                        <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
+                        <div class="panel well well-sm">
+                            <p>Category: {{ $category->name }}</p>
+                            <p>
+                                @if ($ticket->status === 'Open')
+                                    Status: <span class="label label-success">{{ $ticket->status }}</span>
+                                @else
+                                    Status: <span class="label label-danger">{{ $ticket->status }}</span>
+                                @endif
+                            </p>
+                            <p>Priority:
 
+                                @if($ticket->priority==='low')
+                                    <?php $colourspan = "label-info"?>
+                                @elseif($ticket->priority==='medium')
+                                    <?php $colourspan = "label-warning"?>
+                                @elseif($ticket->priority==='high')
+                                    <?php $colourspan = "label-danger"?>
+                                @endif
+                                <span class="label {{$colourspan}}"> {{ucfirst($ticket->priority)}}</span>
+                            </p>
+                            <p>Created on: {{ $ticket->created_at->diffForHumans() }}</p>
+                        </div>
+                        <p>{!!  $ticket->message !!}</p>
                         <?php  $imageTicket = $ticket->image  ?>
                         {{--   assign image field to variable so it can be check to see if it is empty --}}
                         @if(!is_null($imageTicket))
@@ -40,7 +91,7 @@
                             </ul>
                         @endif
                     </div>
-                    
+
                     <hr>
                     <div class="comments">
                         @foreach ($comments as $comment)
@@ -56,15 +107,16 @@
                                             {!! $comment->comment !!}
                                         </p>
                                     </div>
-                                    @if ($errors->has('comment'))
+                                    @if($errors->has('comment'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('comment') }}</strong>
                                     </span>
-                                        @endif
-                                        <?php $imageLoad = $comment->image ?>
-                                        {{--   assign image field to variable so it can be check to see if it is empty --}}
-                                        @if(!is_null($imageLoad))
-                                        </br>
+                                    @endif
+
+                                    <?php $imageLoad = $comment->image ?>
+                                    {{--   assign image field to variable so it can be check to see if it is empty --}}
+                                    @if(!is_null($imageLoad))
+                                        <br/>
 
                                         <ul class="thumbnails">
                                             <li class="img-responsive img-thumbnail"><a
@@ -80,36 +132,38 @@
                             </div>
                         @endforeach
                     </div>
+                    @if ($ticket->status === 'Open')
+                        <div class="comment-form">
+                            <form action="{{ url('comment') }}" method="POST" class="form"
+                                  enctype="multipart/form-data">
+                                {!! csrf_field() !!}
 
-                    <div class="comment-form">
-                        <form action="{{ url('comment') }}" method="POST" class="form" enctype="multipart/form-data">
-                            {!! csrf_field() !!}
+                                <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
 
-                            <input type="hidden" name="ticket_id" value="{{ $ticket->id }}">
+                                <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
+                                    <label for="comment">Comment:</label>
+                                    <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
 
-                            <div class="form-group{{ $errors->has('comment') ? ' has-error' : '' }}">
-                                <label for="comment">Comment:</label>
-                                <textarea rows="10" id="comment" class="form-control" name="comment"></textarea>
+                                    @if ($errors->has('comment'))
+                                        <span class="help-block">
+                                            <strong>{{ $errors->first('comment') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                                <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Attach image:')}}
+                                    {{Form::file('comment_image')}}</div>
 
-                                @if ($errors->has('comment'))
+                                @if ($errors->has('comment_image'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('comment') }}</strong>
+                                                <strong>{{ $errors->first('comment_image') }}</strong>
                                     </span>
                                 @endif
-                            </div>
-                            <div class="form-group {{ $errors->has('comment_image') ? ' has-error' : '' }}">{{Form::label('comment_image', 'Attach image:')}}
-                                {{Form::file('comment_image')}}</div>
-
-                            @if ($errors->has('comment_image'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('comment_image') }}</strong>
-                                    </span>
-                            @endif
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </div>
-                        </form>
-                    </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </form>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>

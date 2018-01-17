@@ -14,7 +14,10 @@
                     @if ($tickets->isEmpty())
                         <p>There are currently no tickets.</p>
                     @else
-                        <table class="table">
+                        @include('includes.flash')
+                    <!-- TODO: Make rows sortable -->.
+
+                        <table id="ticket-table" class="table table-striped table-bordered">
                             <thead>
                             <tr>
                                 <th>Category</th>
@@ -28,6 +31,7 @@
                             @foreach ($tickets->reverse() as $ticket)
                                 <tr>
                                     <td>
+
                                         @foreach ($categories as $category)
                                             @if ($category->id === $ticket->category_id)
                                                 {{ $category->name }}

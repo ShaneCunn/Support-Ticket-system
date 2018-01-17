@@ -189,6 +189,11 @@ return [
 
         // ... html  purifer, clean html code for placement in database
          Mews\Purifier\PurifierServiceProvider::class,
+
+
+        // ...  Datatables Service Provider and Facade package
+
+        Yajra\Datatables\DatatablesServiceProvider::class,
     ],
 
     /*
