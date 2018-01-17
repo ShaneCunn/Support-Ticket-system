@@ -37,7 +37,7 @@
 <!-- jQuery -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- DataTables -->
-    <script src="//cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
+            <script src="https://cdn.datatables.net/1.10.7/js/jquery.dataTables.min.js"></script>
 
     <!-- App scripts -->
     <script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
