@@ -12,6 +12,7 @@
                     <div class="panel-heading"><i class="fa fa-ticket"> Tickets</i></div>
 
                     <div class="panel-body">
+                        @include('includes.flash')
                         <table class="table table-bordered" id="users-table">
                             <thead>
                             <tr>

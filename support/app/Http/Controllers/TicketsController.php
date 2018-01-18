@@ -88,7 +88,7 @@ class TicketsController extends Controller
 
         $mailer->sendTicketStatusNotification($ticketOwner, $ticket); // sent email to customer about the ticket
 
-        return redirect()->back()->with("status", "The ticket has been closed.");
+        return redirect()->back()->with("closed", "The ticket has been closed.");
     }
 
     public function destroy($id)
