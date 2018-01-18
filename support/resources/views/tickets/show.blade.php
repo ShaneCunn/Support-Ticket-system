@@ -9,8 +9,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h2> {{ $ticket->ticket_id }} - {{ $ticket->title }}
-                        <div class="form-group">
-                            <form class="form-horizontal">
+
                         <span class="pull-right">
                                @if ($ticket->status === 'Open')
                                 <form role="form" action="{{ url('admin/close_ticket/' . $ticket->ticket_id) }}"
@@ -48,7 +47,7 @@
                                             class="glyphicon glyphicon-remove"></span></button>
                                        </form>
                                 </span>
-                            </form>   </div>
+
                     </h2>
                 </div>
 
