@@ -13,7 +13,7 @@ class TicketsTableSeeder extends Seeder
     {
       
         $faker= Faker::create();
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 1000; $i++) {
 
             DB::table('tickets')->insert([
                 'user_id' => 1,
