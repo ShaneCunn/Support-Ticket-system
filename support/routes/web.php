@@ -34,7 +34,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
     Route::post('open_ticket/{ticket_id}', 'TicketsController@open');
     Route::post('destroy_ticket/{ticket_id}', 'TicketsController@destroy');
 });
-
+Route::get('admin/tickets/{ticket_id}', 'TicketsController@show');
 
 
 Route::get('/home', 'HomeController@index')->name('home');

@@ -57,7 +57,7 @@ class TicketsController extends Controller
         $tickets = Ticket::paginate(10);
         $categories = Category::all();
 
-        return view('tickets.index', compact('tickets', 'categories'));
+        return view('tickets.datatable', compact('tickets', 'categories'));
     }
 
     public function open($ticket_id, AppMailer $mailer)
