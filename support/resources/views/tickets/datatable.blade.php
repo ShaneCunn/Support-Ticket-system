@@ -8,6 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
+
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-ticket"> Tickets</i></div>
 
@@ -23,7 +24,7 @@
                                 <th>Priority</th>
                                 <th>Status</th>
                                 <th>Updated at</th>
-                                <th>Action</th>
+
 
                             </tr>
                             </thead>
@@ -37,7 +38,8 @@
 @endsection
 
 @section('javascripts')
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
     <script>
 
         $('#users-table').DataTable({
@@ -53,7 +55,6 @@
                 {data: 'status', name: 'status'},
                 {data: 'updated_at', name: 'updated_at'},
 
-                {data: 'action', name: 'action', orderable: false, searchable: false},
 
             ],
             initComplete: function () {

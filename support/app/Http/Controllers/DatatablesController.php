@@ -35,16 +35,14 @@ class DatatablesController extends Controller
         $tickets = DB::table('tickets')->join('categories', 'tickets.category_id', '=', 'categories.id')
             ->select(['tickets.id', 'categories.name', 'tickets.title', 'tickets.updated_at', 'tickets.status', 'tickets.ticket_id', 'tickets.priority']);
         return Datatables::of($tickets)
-            ->editColumn('title', '{!! str_limit($title, 60) !!}')
+            /*   ->editColumn('title', '{!! str_limit($title, 60) !!}')*/
             ->editColumn('name', '{!! str_limit($name, 60) !!}')
-            ->addColumn('action', function ($tickets) {
+            ->addColumn('ticket_id', function ($tickets) {
 
-                $return = '<a href="tickets/' . $tickets->ticket_id . '" class="btn btn-xs btn-primary">
-<i class="glyphicon glyphicon-edit"></i> Read </a>';
+                return '<a href="tickets/' . $tickets->ticket_id . '">' . $tickets->ticket_id . '</a>';
 
-                return $return;
-
-            })->make(true);
+            })->rawColumns(['ticket_id'])
+            ->make(true);
 
 
     }
