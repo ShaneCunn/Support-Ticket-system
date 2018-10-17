@@ -1,7 +1,6 @@
 # Support-Ticket-system
 Simple IT helpdesk written in Laravel and runs on PHP 7.0
 
-[![N|Solid](http://www.onetouchtelecare.com/images/logo1.png)](http://www.onetouchtelecare.com/)
 
 IT Support Ticket is a Helpdesk written in Laravel 5.5 and run PHP 7.0
 ## Requirements
